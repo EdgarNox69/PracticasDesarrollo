@@ -12,16 +12,17 @@
 </head>
 <body>
     
-    <form action="menu.html" class="form-box animate__animated animate__fadeInUp">
+    <form action="menu.html" class="form-box animate__animated animate__fadeInUp" method="POST">
         <h1 class="form-title">Crea una cuenta</h1>
+        <input type="text" placeholder="Primer Nombre" name="pnombre" id="pnombre">
+        <input type="text" placeholder="Segundo Nombre" name="snombre" id="snombre">
+        <input type="text" placeholder="Primer Apellido" name="papellido" id="papellido">
+        <input type="text" placeholder="Segundo Apellido" name="sapellido" id="sapellido">
         <input type="text" placeholder="Username" name="usuario" id="usuario">
-        <input type="correo" placeholder="Mail" name="correo" id="correo">
+        <input type="correo" placeholder="Correo" name="correo" id="correo">
         <input type="password" placeholder="Password" name="contraseña" id="contraseña">
-        <input type="date" id="birthday" name="Birthday" id="fechaNacimiento">
-        
-        <button type="submit">
-            REGISTER
-        </button>
+        <input type="date" id="birthday" name="birthday">
+        <input type="submit" placeholder="Registrarse" id="enviar" name="enviar" value="Enviar">
 
         <a href="index.html">Ya tienes usuario? Inicia Sesion!</a>
 

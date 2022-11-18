@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request, session
+from flask import Flask, redirect, render_template,request, session, jsonify, url_for
 from funciones import *
 from login import *
 from passlib.hash import sha256_crypt
@@ -14,9 +14,9 @@ def handle_context():
 @app.route("/")
 def index():
     if user_in_sesion != "invitado":
-        return render_template("menu.html")
+        return render_template("index.html")
     else:
-        return render_template("menu.html")
+        return render_template("index.html")
     
 
 @app.route('/login', methods=['GET','POST'])
@@ -65,14 +65,17 @@ def new_user():
         valor = request.form['enviar']
         if valor == 'Enviar':
             usuario = request.form['usuario']
-            n_competo  = request.form['n_competo']
-            direccion = request.form['direccion']
-            celular = request.form['celular']
+            p_Nombre  = request.form['pnombre']
+            s_nombre  = request.form['snombre']
+            p_Apellido  = request.form['papellido']
+            s_Apellido  = request.form['sapellido']
+            correo = request.form['direccion']
+            date = request.form['Birthday']
             password = request.form['password']
             password_cryp = sha256_crypt.hash(password)
             c_usuario = comprobar_usuario()
             if usuario not in c_usuario:
-                save_user(n_competo, usuario, password_cryp, direccion, celular)
+                save_user(p_Nombre, s_nombre, p_Apellido, correo, usuario, password_cryp, date)
                 return redirect('/login')
 
 @app.route('/restart_password', methods=['GET','POST'])
@@ -93,17 +96,6 @@ def restart_password():
                 actualizar_password(usuario, password)
                 return redirect("/")
             
-@app.route('/personajes', methods=['GET','POST'])
-@app.route('/personajes/', methods=['GET','POST'])
-def personajes():
-    if request.method == 'GET':
-        msg = ''
-        return render_template('/Personajes.html')
-    if request.method == 'POST':
-        print()
-
-
-
 
 #Cerrar sesion
 @app.route('/logout', methods=['GET'])

@@ -97,6 +97,34 @@ def restart_password():
                 return redirect("/")
             
 
+@app.route('/personajes', methods=['GET','POST'])
+@app.route('/personajes/', methods=['GET','POST'])
+def personajes():
+    if request.method =='GET':
+        msg = ''
+
+        return render_template('Personajes.html',mensaje=msg)
+
+@app.route('/foros', methods=['GET','POST'])
+@app.route('/foros/', methods=['GET','POST'])
+def foros():
+    if request.method =='GET':
+        msg = ''
+
+        return render_template('foros.html',mensaje=msg)
+    if request.method == 'POST':
+        valor = request.form['enviar']
+        if valor == 'Enviar':
+            return redirect("/")
+
+@app.route('/menu', methods=['GET','POST'])
+@app.route('/menu/', methods=['GET','POST'])
+def menu():
+    if request.method =='GET':
+        msg = ''
+
+        return render_template('menu.html',mensaje=msg)
+
 #Cerrar sesion
 @app.route('/logout', methods=['GET'])
 @app.route('/logout/', methods=['GET'])

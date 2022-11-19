@@ -17,13 +17,13 @@ def conectarse()->None:
     return pymysql.connect(host='127.0.0.1',
                                 user='root',
                                 password='2117',
-                                db='prueba_bd')
+                                db='bd_practica')
 
-def save_user(pNombre:str, sNombre:str, pApellido:str, sApelldio:str, correo:str, usuario:str, password:str, date:str)->None:
+def save_user(pNombre:str, sNombre:str, pApellido:str, sApelldio:str, correo:str, usuario:str, password:str)->None:
     conexion = conectarse()
     with conexion.cursor() as cursor:
-        cursor.execute("INSERT INTO usuarios(primerApellido, segundoNombre, apellidoPaterno, apellidoMaterno, correo, usuario, password, fechaCumpleaños) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
-                       (pNombre, sNombre, pApellido, sApelldio, correo, usuario, password, date))
+        cursor.execute("INSERT INTO usuarios(primerNombre, segundoNombre, apellidoPaterno, apellidoMaterno, correo, usuario, contraseña) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                       (pNombre, sNombre, pApellido, sApelldio, correo, usuario, password))
     conexion.commit()
     conexion.close()
     
@@ -66,13 +66,37 @@ def actualizar_password(user_name:str, password: str)->str:
     conexion.commit()
     conexion.close()
 
-def save_peliculas(nombre:str, clasificacion:str, duracion:float, imagen:str)->None:
+def save_peliculas(nombre:str, clasificacion:str, duracion:float, imagen:str, sinopsis:str)->None:
     conexion = conectarse()
     with conexion.cursor() as cursor:
-        cursor.execute("INSERT INTO peliculas(nombre, clasificacion, duracion, imagen) VALUES (%s, %s, %s, %s)",
-                       (nombre, clasificacion, duracion, imagen))
+        cursor.execute("INSERT INTO peliculas(nombre, clasificacion, duracion, imagen, sonopsis) VALUES (%s, %s, %s, %s, %s)",
+                       (nombre, clasificacion, duracion, imagen, sinopsis))
     conexion.commit()
     conexion.close()
+
+def get_pelicula(nPelicula:str)->list:
+    peliculas = [],[]
+    conexion = conectarse()
+    with conexion.cursor() as cursor:
+        nombre = cursor.execute("SELECT nombre FROM peliculas WHERE nombre = '" + nPelicula + "'")
+        nombre = cursor.fetchone()
+        clasificaion = cursor.execute("SELECT clasificacion FROM peliculas WHERE nombre = '" + nPelicula + "'")
+        clasificaion = cursor.fetchone()
+        duracion = cursor.execute("SELECT duracion FROM peliculas WHERE nombre = '" + nPelicula + "'")
+        duracion = cursor.fetchone()
+        imagen = cursor.execute("SELECT imagen FROM peliculas WHERE nombre = '" + nPelicula + "'")
+        imagen = cursor.fetchone()
+    conexion.close() 
+    for i in range(len(nombre)):
+        nom = nombre.__getitem__(i)
+        clas = clasificaion.__getitem__(i)
+        dura = duracion.__getitem__(i)
+        img = imagen.__getitem__(i)
+        peliculas[i][0] = nom
+        peliculas[i][1] = clas
+        peliculas[i][2] = dura
+        peliculas[i][3] = img
+    return peliculas 
 
 def get_peliculas()->list:
     peliculas = [],[]
@@ -80,11 +104,11 @@ def get_peliculas()->list:
     with conexion.cursor() as cursor:
         nombre = cursor.execute("SELECT nombre FROM peliculas")
         nombre = cursor.fetchall()
-        clasificaion = cursor.execute("SELECT nombre FROM peliculas")
+        clasificaion = cursor.execute("SELECT clasificacion FROM peliculas")
         clasificaion = cursor.fetchall()
-        duracion = cursor.execute("SELECT nombre FROM peliculas")
+        duracion = cursor.execute("SELECT duracion FROM peliculas")
         duracion = cursor.fetchall()
-        imagen = cursor.execute("SELECT nombre FROM peliculas")
+        imagen = cursor.execute("SELECT imagen FROM peliculas")
         imagen = cursor.fetchall()
     conexion.close() 
     for i in range(len(nombre)):

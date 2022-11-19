@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template,request, session, jsonify, url_for
+from flask import *
 from funciones import *
 from login import *
 from passlib.hash import sha256_crypt
@@ -13,10 +13,15 @@ def handle_context():
 
 @app.route("/")
 def index():
+    pelis = get_peliculas()
     if user_in_sesion != "invitado":
-        return render_template("index.html")
+        return render_template("index.html", peliculas = pelis)
+    if request.method == 'POST':
+        valor = request.form['enviar']
+        if valor == 'Enviar':
+            usuario = request.form['usuario']
     else:
-        return render_template("index.html")
+        return render_template("index.html", peliculas = pelis)
     
 
 @app.route('/login', methods=['GET','POST'])
@@ -52,7 +57,7 @@ def login():
                             return redirect("/")
                     else:
                         msg = f'El password de {usuario} no corresponde'
-                        return render_template('index.html',mensaje=msg)
+                        return render_template('/login.html',mensaje=msg)
 #"""
 
 @app.route('/new_user', methods=['GET','POST'])
@@ -69,14 +74,13 @@ def new_user():
             s_nombre  = request.form['snombre']
             p_Apellido  = request.form['papellido']
             s_Apellido  = request.form['sapellido']
-            correo = request.form['direccion']
-            date = request.form['Birthday']
-            password = request.form['password']
+            correo = request.form['correo']
+            password = request.form['contraseña']
             password_cryp = sha256_crypt.hash(password)
             c_usuario = comprobar_usuario()
             if usuario not in c_usuario:
-                save_user(p_Nombre, s_nombre, p_Apellido, correo, usuario, password_cryp, date)
-                return redirect('/login')
+                save_user(p_Nombre, s_nombre, p_Apellido, s_Apellido, correo, usuario, password_cryp)
+            return redirect('/login')
 
 @app.route('/restart_password', methods=['GET','POST'])
 @app.route('/restart_password/', methods=['GET','POST'])
@@ -96,34 +100,38 @@ def restart_password():
                 actualizar_password(usuario, password)
                 return redirect("/")
             
-
-@app.route('/personajes', methods=['GET','POST'])
-@app.route('/personajes/', methods=['GET','POST'])
-def personajes():
-    if request.method =='GET':
+@app.route('/save_pelicula', methods=['GET','POST'])
+@app.route('/save_pelicula/', methods=['GET','POST'])
+def save_pelicula():
+    if request.method == 'GET':
         msg = ''
-
-        return render_template('Personajes.html',mensaje=msg)
-
-@app.route('/foros', methods=['GET','POST'])
-@app.route('/foros/', methods=['GET','POST'])
-def foros():
-    if request.method =='GET':
-        msg = ''
-
-        return render_template('foros.html',mensaje=msg)
+        return render_template('save_Peliculas.html',mensaje=msg)
     if request.method == 'POST':
         valor = request.form['enviar']
         if valor == 'Enviar':
-            return redirect("/")
-
-@app.route('/menu', methods=['GET','POST'])
-@app.route('/menu/', methods=['GET','POST'])
-def menu():
-    if request.method =='GET':
+            nombre = request.form['nombre']
+            clasificaion  = request.form['clasificacion']
+            duracion  = request.form['duracion']
+            imagen  = request.form['imagen']
+            os.mkdir("./static/imagenes/"+imagen)
+            sinopsis  = request.form['sinopsis']
+            c_pelicula = get_peliculas()
+            if nombre not in c_pelicula:
+                save_user(nombre, clasificaion, duracion,imagen, sinopsis)
+                return redirect('/')
+            
+@app.route('/pelicula', methods=['GET','POST'])
+@app.route('/pelicula/<nombre>', methods=['GET','POST'])
+def pelicula():
+    if request.method == 'GET':
         msg = ''
-
-        return render_template('menu.html',mensaje=msg)
+        return render_template('save_Peliculas.html',mensaje=msg)
+    if request.method == 'POST':
+        valor = request.form['enviar']
+        if valor == 'Enviar':
+            nombre = request.form['nombre']
+            peli = get_pelicula()
+            return render_template('/pelicula.html', pelicula = peli)
 
 #Cerrar sesion
 @app.route('/logout', methods=['GET'])

@@ -12,20 +12,16 @@
 </head>
 <body>
     
-    <form action="menu.html" class="form-box animate__animated animate__fadeInUp">
+    <form method="POST" class="form-box animate__animated animate__fadeInUp">
         <h1 class="form-title">Sing In</h1>
 
-        <input type="text" placeholder="Username" name="username">
+        <input type="text" placeholder="Username" id="usuario" name="usuario">
         <input type="password" placeholder="Password" name="password">
-        <button type="submit">
+        <button method="POST" id="enviar" name = "Enviar" value="Enviar" type="submit">
             LOGIN
         </button>
 
-        <button type="submit"formaction="register.html">
-            REGISTER
-        </button>
-
-        <a href="registro.html">No tienes usuario? Registrate ya! </a>
+        <a href="/new_user">No tienes usuario?</a>
 
     </form>
 

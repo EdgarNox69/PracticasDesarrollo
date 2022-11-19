@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}{{pelicula[0]}}{% endblock %}
+{% block head %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{{super()}}
+{% endblock %}
+{% block body %}
+    <div>
+        <div name = "imagen">
+            <img class="img-fluid" src="./static/imagenes/{{peliclas[3]}}" width="50%" height="50%" alt="{{peliclas[0]}}"/>
+        </div>
+        <div>
+            <p>Duracion: {{peliclas[2]}}</p>
+        </div>
+    </div>
+{% endblock %}

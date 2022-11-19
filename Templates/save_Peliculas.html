@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Guardar Pelicula{% endblock %}
+{% block head %}
+{{super()}}
+{% endblock %}
+{% block body %}
+    <div>
+        <div>
+
+        </div>
+        <div>
+            
+        </div>
+        <div>
+
+        </div>
+        <div>
+
+        </div>
+        <div>
+            <form method="post" action="index" enctype="multipart/form-data">
+            <input type="file" name="archivo"/><br>
+            
+            </form>            
+        </div>
+        <div>
+            <button type="submit" name="Enviar" id="enviar" value="Enviar">Enviar</button>
+        </div>
+    </div>
+{% endblock %}

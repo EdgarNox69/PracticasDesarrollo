@@ -1,9 +1,9 @@
 from passlib.hash import sha256_crypt
 import pymysql
-    
+from numpy import *
 #'''
 class Usuarios():
-    def __init__(self, pNombre, sNombre, pApellido, sApellido, correo, usuario, password, date):
+    def __init__(self, pNombre, sNombre, pApellido, sApellido, correo, usuario, password):
         self.pNomnbre = pNombre
         self.sNombre = sNombre
         self.pApellido = pApellido
@@ -11,7 +11,6 @@ class Usuarios():
         self.correo = correo
         self.usuario = usuario
         self.password = password
-        self.date = date
 #Cambiar los datos necesarios
 def conectarse()->None:
     return pymysql.connect(host='127.0.0.1',
@@ -62,13 +61,13 @@ def get_datos_usuario(user_name:str)->dict:
     c = correo.__getitem__(0)
     us = usuario.__getitem__(0)
     con = contraseña.__getitem__(0)
-    datosU[0][0] = pn
-    datosU[0][1] = sn
-    datosU[0][2] = ap
-    datosU[0][3] = am
-    datosU[0][4] = c
-    datosU[0][5] = us
-    datosU[0][6] = con
+    datosU[0][0] = pn.__getitem__(0)
+    datosU[0][1] = sn.__getitem__(0)
+    datosU[0][2] = ap.__getitem__(0)
+    datosU[0][3] = am.__getitem__(0)
+    datosU[0][4] = c.__getitem__(0)
+    datosU[0][5] = us.__getitem__(0)
+    datosU[0][6] = con.__getitem__(0)
     return datosU
 
 def comprobar_usuario()->list:
@@ -91,8 +90,8 @@ def get_password(user_name:str)->str:
     conexion.close() 
     for i in range(len(password)):
         pas = password.__getitem__(i)
-    print(pas)
     return pas 
+
 get_password("Prueba")
 def actualizar_password(user_name:str, password: str)->str:
     password_cryp = sha256_crypt.hash(password)
@@ -128,10 +127,10 @@ def get_pelicula(nPelicula:str)->list:
         clas = clasificaion.__getitem__(i)
         dura = duracion.__getitem__(i)
         img = imagen.__getitem__(i)
-    peliculas[0][0] = nom
-    peliculas[0][1] = clas
-    peliculas[0][2] = dura
-    peliculas[0][3] = img
+    peliculas[0][0] = nom.__getitem__(i)
+    peliculas[0][1] = clas.__getitem__(i)
+    peliculas[0][2] = dura.__getitem__(i)
+    peliculas[0][3] = img.__getitem__(i)
     return peliculas 
 
 def get_peliculas()->list:
@@ -152,17 +151,17 @@ def get_peliculas()->list:
         clas = clasificaion.__getitem__(i)
         dura = duracion.__getitem__(i)
         img = imagen.__getitem__(i)
-        peliculas[i][0] = nom
-        peliculas[i][1] = clas
-        peliculas[i][2] = dura
-        peliculas[i][3] = img
+        peliculas[i][0] = nom.__getitem__(i)
+        peliculas[i][1] = clas.__getitem__(i)
+        peliculas[i][2] = dura.__getitem__(i)
+        peliculas[i][3] = img.__getitem__(i)
     return peliculas 
 
-def save_post(usuario:str, titulo:str, descripcion:float, fecha:str)->None:
+def save_post(usuario:str, titulo:str, descripcion:float)->None:
     conexion = conectarse()
     with conexion.cursor() as cursor:
-        cursor.execute("INSERT INTO post(usuario, titulo, comentario, fecha) VALUES (%s, %s, %s, %s)",
-                       (usuario, titulo, descripcion, fecha))
+        cursor.execute("INSERT INTO post(usuario, titulo, comentario,) VALUES (%s, %s, %s)",
+                       (usuario, titulo, descripcion))
     conexion.commit()
     conexion.close()
 
@@ -178,27 +177,22 @@ def get_post()->list:
         post = cursor.fetchall()
         replica = cursor.execute("SELECT replica FROM comentarios ")
         replica = cursor.fetchall()
-        fecha = cursor.execute("SELECT fecha FROM comentarios ")
-        fecha = cursor.fetchall()
     conexion.close() 
     for i in range(len(usuario)):
         us = usuario.__getitem__(i)
         com = comentario.__getitem__(i)
         pos = post.__getitem__(i)
         repl = replica.__getitem__(i)
-        fech = fecha.__getitem__(i)
-        comentarios[i][0] = us
-        comentarios[i][1] = com
-        comentarios[i][2] = pos
-        comentarios[i][3] = repl
-        comentarios[i][4] = fech
+        comentarios[i][1] = com.__getitem__(i)
+        comentarios[i][2] = pos.__getitem__(i)
+        comentarios[i][3] = repl.__getitem__(i)
     return comentarios 
 
-def save_quejas(usuario:str, queja:str, fecha:str)->None:
+def save_quejas(usuario:str, queja:str)->None:
     conexion = conectarse()
     with conexion.cursor() as cursor:
-        cursor.execute("INSERT INTO queja(usuario, queja, fecha) VALUES (%s, %s, %s)",
-                       (usuario, queja, fecha))
+        cursor.execute("INSERT INTO quejas(usuario, queja) VALUES (%s, %s)",
+                       (usuario, queja))
     conexion.commit()
     conexion.close()
     
@@ -210,16 +204,14 @@ def get_quejas()->list:
         usuario = cursor.fetchall()
         queja = cursor.execute("SELECT queja FROM quejas")
         queja = cursor.fetchall()
-        fecha = cursor.execute("SELECT fecha FROM quejas")
-        fecha = cursor.fetchall()
     conexion.close() 
     for i in range(len(usuario)):
         us = usuario.__getitem__(i)
         quej = queja.__getitem__(i)
-        fech = fecha.__getitem__(i)
-        quejas[i][0] = us
-        quejas[i][1] = quej
-        quejas[i][2] = fech
+        quejas[i][0] = us.__getitem__(i)
+        quejas[i][1] = quej.__getitem__(i)
+        
+    print(str(quejas))
     return quejas 
-
+get_quejas()
 #Referencia de los get: https://parzibyte.me/blog/2021/03/29/flask-mysql-ejemplo-conexion-crud/

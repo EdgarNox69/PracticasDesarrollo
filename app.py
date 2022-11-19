@@ -2,6 +2,7 @@ from flask import *
 from funciones import *
 from login import *
 from passlib.hash import sha256_crypt
+from numpy import *
 import os
 
 app = Flask(__name__)
@@ -153,14 +154,16 @@ def foro():
 @app.route('/quejas/', methods=['GET','POST'])
 def quejas():
     if request.method == 'GET':
-        queja = get_quejas()
-        return render_template('quejas.html', quejas = queja)
+        quejaa = get_quejas()
+        return render_template('quejas.html', quejas = quejaa)
     if request.method == 'POST':
         valor = request.form['enviar']
         if valor == 'Enviar':
-            nombre = request.form['nombre']
-            queja = get_quejas()
-            return render_template('quejas.html', quejas = queja)
+            usuario = request.form['usuario']
+            queja = request.form['queja']
+            save_quejas(usuario, queja)
+            quejaa = get_quejas()
+            return render_template('quejas.html', quejas = quejaa)
 
 #Cerrar sesion
 @app.route('/logout', methods=['GET'])

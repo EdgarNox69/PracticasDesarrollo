@@ -16,33 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `comentarios`
---
-
-DROP TABLE IF EXISTS `comentarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `comentarios` (
-  `idcomentarios` int NOT NULL AUTO_INCREMENT,
-  `usuario` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
-  `comentario` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
-  `Post` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
-  `replica` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
-  PRIMARY KEY (`idcomentarios`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `comentarios`
---
-
-LOCK TABLES `comentarios` WRITE;
-/*!40000 ALTER TABLE `comentarios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `comentarios` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `peliculas`
 --
 
@@ -55,6 +28,7 @@ CREATE TABLE `peliculas` (
   `clasificacion` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
   `duracion` float DEFAULT NULL,
   `imagen` mediumtext COLLATE utf8mb3_bin,
+  `sinopsis` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
   PRIMARY KEY (`idpeliculas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -79,8 +53,7 @@ CREATE TABLE `post` (
   `idpost` int NOT NULL AUTO_INCREMENT,
   `usuario` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
   `titulo` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
-  `descripcion` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
-  `imagen` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
+  `comentario` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   PRIMARY KEY (`idpost`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
@@ -106,9 +79,8 @@ CREATE TABLE `quejas` (
   `idquejas` int NOT NULL AUTO_INCREMENT,
   `usuario` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
   `queja` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
   PRIMARY KEY (`idquejas`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,6 +89,7 @@ CREATE TABLE `quejas` (
 
 LOCK TABLES `quejas` WRITE;
 /*!40000 ALTER TABLE `quejas` DISABLE KEYS */;
+INSERT INTO `quejas` VALUES (1,'Prueba','Esto es una queja de prueba');
 /*!40000 ALTER TABLE `quejas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -135,10 +108,9 @@ CREATE TABLE `usuarios` (
   `apellidoMaterno` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
   `correo` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
   `usuario` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
-  `contraseña` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
-  `fechaCumpleaños` date DEFAULT NULL,
+  `contraseña` longtext COLLATE utf8mb3_bin,
   PRIMARY KEY (`idusuarios`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,6 +119,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+INSERT INTO `usuarios` VALUES (1,'Preuaba','PPrueba','pPrueba','ppPrueba','prueba@hotmail.com','Prueba','$5$rounds=535000$FrSILsega3it76mr$akPvDT9u1t.mD.AkToYgXZa1.Pyg13HLEIUyQVXOcr7');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -159,4 +132,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-17  9:35:22
+-- Dump completed on 2022-11-19 15:27:21

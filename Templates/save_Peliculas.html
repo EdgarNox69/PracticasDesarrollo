@@ -1,30 +1,35 @@
 {% extends "base.html" %}
 {% block title %}Guardar Pelicula{% endblock %}
 {% block head %}
+<style>
+    div.datos{
+        padding-left: 40%;
+        padding-top: 5%;
+    }
+</style>
 {{super()}}
 {% endblock %}
 {% block body %}
-    <div>
-        <div>
-
-        </div>
-        <div>
-            
-        </div>
-        <div>
-
-        </div>
-        <div>
-
-        </div>
-        <div>
-            <form method="post" action="index" enctype="multipart/form-data">
-            <input type="file" name="archivo"/><br>
-            
-            </form>            
-        </div>
-        <div>
-            <button type="submit" name="Enviar" id="enviar" value="Enviar">Enviar</button>
-        </div>
+    <div class="datos">
+        <form  action="" method="POST" enctype="multipart/form-data">
+            <div class="nombre">
+                <input type="text" placeholder="Nombre" name="nombre">
+            </div>
+            <div class="clasificacion">
+                <input type="text" placeholder="Clasificacion" name="clasificacion">
+            </div>
+            <div class="duracion">
+                <input type="text" placeholder="Duracion" name="duracion">
+            </div>
+            <div class="sinopsis">
+                <input type="textBox" placeholder="Sinopsis" name="sinopsis">
+            </div>
+            <div class="img">
+                <input type="file" accept="image/*" id="imagen" name="imagen" value="Imagen">
+            </div>
+            <div class="boton">
+                <button method="POST" id="enviar" name = "Enviar" value="Enviar" type="submit">Guardar</button>
+            </div>
+        </form>  
     </div>
 {% endblock %}

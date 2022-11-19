@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Qeujas{% endblock %}
+{% block head %}
+    <style>
+        div.form{
+            padding-top: 5%;
+            padding-left: 25%;
+        }
+        div.cquejas{
+            padding-top: 5%;
+            padding-left: 40%;
+        }
+        ul.li{
+            padding-left: 5%;
+        }
+    </style>
+{{super()}}
+{% endblock %}
+{% block body %}
+    <div class="form">
+        <form action="" class="form-box animate__animated animate__fadeInUp" method="POST">
+            <input type="text" placeholder="Usuario" name="usuario" id="usuario">
+            <input type="textBox" placeholder="Queja" name="queja" id="queja">
+            <input type="date" name="date" id="date">
+            <input type="submit" placeholder="Registrarse" id="enviar" name="enviar" value="Enviar">
+        </form>
+    </div>
+    <div class="cquejas">
+        <div >{% for quejas in quejas %}
+            <ul>
+                <li>
+                    <p>Usuario: {{quejas[0]}}</p>
+                </li>
+                <li>
+                    <p>Queja: {{quejas[1]}}</p>
+                </li>
+                <li>
+                    <p>Fecha: {{quejas[2]}}</p>
+                </li>
+            </ul>
+        </div>{% endfor %}
+    </div>
+{% endblock %}

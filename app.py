@@ -105,19 +105,19 @@ def restart_password():
 def save_pelicula():
     if request.method == 'GET':
         msg = ''
-        return render_template('save_Peliculas.html',mensaje=msg)
+        return render_template('/save_Peliculas.html',mensaje=msg)
     if request.method == 'POST':
-        valor = request.form['enviar']
+        valor = request.form['Enviar']
         if valor == 'Enviar':
             nombre = request.form['nombre']
-            clasificaion  = request.form['clasificacion']
-            duracion  = request.form['duracion']
-            imagen  = request.form['imagen']
-            os.mkdir("./static/imagenes/"+imagen)
+            clasificaion = request.form['clasificacion']
+            duracion = request.form['duracion']
+            img = request.form['imagen']
+            os.mkdir("./static/imagenes/"+img)
             sinopsis  = request.form['sinopsis']
             c_pelicula = get_peliculas()
             if nombre not in c_pelicula:
-                save_user(nombre, clasificaion, duracion,imagen, sinopsis)
+                save_pelicula(nombre, clasificaion, duracion, img, sinopsis)
                 return redirect('/')
             
 @app.route('/pelicula', methods=['GET','POST'])
@@ -132,6 +132,35 @@ def pelicula():
             nombre = request.form['nombre']
             peli = get_pelicula()
             return render_template('/pelicula.html', pelicula = peli)
+
+@app.route('/perfil', methods=['GET','POST'])
+@app.route('/perfil/<usuario>', methods=['GET','POST'])
+def usuario():
+    if request.method == 'GET':
+        msg = ''
+        usuario = get_datos_usuario(user_in_sesion)
+        return render_template('perfil.html', datos = usuario)
+        
+@app.route('/foro', methods=['GET','POST'])
+@app.route('/foro/', methods=['GET','POST'])
+def foro():
+    if request.method == 'GET':
+        msg = ''
+        pos = get_post()
+        return render_template('foro.html', post = pos)
+        
+@app.route('/quejas', methods=['GET','POST'])
+@app.route('/quejas/', methods=['GET','POST'])
+def quejas():
+    if request.method == 'GET':
+        queja = get_quejas()
+        return render_template('quejas.html', quejas = queja)
+    if request.method == 'POST':
+        valor = request.form['enviar']
+        if valor == 'Enviar':
+            nombre = request.form['nombre']
+            queja = get_quejas()
+            return render_template('quejas.html', quejas = queja)
 
 #Cerrar sesion
 @app.route('/logout', methods=['GET'])

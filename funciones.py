@@ -1,6 +1,5 @@
 from passlib.hash import sha256_crypt
 import pymysql
-from numpy import *
 #'''
 class Usuarios():
     def __init__(self, pNombre, sNombre, pApellido, sApellido, correo, usuario, password):
@@ -133,7 +132,6 @@ def get_pelicula(nPelicula:str)->list:
     return peliculas 
 
 def get_peliculas()->list:
-    peliculas = [n,4]
     conexion = conectarse()
     with conexion.cursor() as cursor:
         nombre = cursor.execute("SELECT nombre FROM peliculas")
@@ -145,6 +143,8 @@ def get_peliculas()->list:
         imagen = cursor.execute("SELECT imagen FROM peliculas")
         imagen = cursor.fetchall()
     conexion.close() 
+    n=len(nombre)
+    peliculas = [n,4]
     for i in range(len(nombre)):
         nom = nombre.__getitem__(i)
         clas = clasificaion.__getitem__(i)
@@ -165,7 +165,6 @@ def save_post(usuario:str, titulo:str, descripcion:float)->None:
     conexion.close()
 
 def get_post()->list:
-    comentarios = [n,3]
     conexion = conectarse()
     with conexion.cursor() as cursor:
         usuario = cursor.execute("SELECT usuario FROM comentarios " )
@@ -175,6 +174,8 @@ def get_post()->list:
         post = cursor.execute("SELECT post FROM comentarios ")
         post = cursor.fetchall()
     conexion.close() 
+    n=len(usuario)
+    comentarios = [n,3]
     for i in range(len(usuario)):
         us = usuario.__getitem__(i)
         com = comentario.__getitem__(i)
@@ -194,7 +195,6 @@ def save_quejas(usuario:str, queja:str)->None:
     conexion.close()
     
 def get_quejas()->list:
-    quejas = [n,2]
     conexion = conectarse()
     with conexion.cursor() as cursor:
         usuario = cursor.execute("SELECT usuario FROM quejas" )
@@ -202,6 +202,8 @@ def get_quejas()->list:
         queja = cursor.execute("SELECT queja FROM quejas")
         queja = cursor.fetchall()
     conexion.close() 
+    n=len(usuario)
+    quejas = [n,2]
     for i in range(len(usuario)):
         us = usuario.__getitem__(i)
         quej = queja.__getitem__(i)
@@ -210,5 +212,5 @@ def get_quejas()->list:
         
     print(str(quejas))
     return quejas 
-#get_quejas()
+get_quejas()
 #Referencia de los get: https://parzibyte.me/blog/2021/03/29/flask-mysql-ejemplo-conexion-crud/

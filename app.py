@@ -2,7 +2,7 @@ from flask import *
 from funciones import get_peliculas, get_usuario, comprobar_usuario, get_password, save_user, actualizar_password, get_datos_usuario, get_pelicula, get_quejas, save_quejas, get_post, save_post
 from login import *
 from passlib.hash import sha256_crypt
-#from numpy import *
+from numpy import *
 import os
 
 app = Flask(__name__)

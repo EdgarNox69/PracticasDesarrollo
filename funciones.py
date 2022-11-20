@@ -35,8 +35,8 @@ def get_usuario(user_name:str)->str:
     us = usuario.__getitem__(0)
     return us
 
-def get_datos_usuario(user_name:str)->dict:
-    datosU = [],[]
+def get_datos_usuario(user_name:str)->list:
+    datosU = [1,7]
     conexion = conectarse()
     with conexion.cursor() as cursor:
         primerNombre = cursor.execute("SELECT primerNombre FROM usuarios WHERE usuario = " + "'" + user_name + "'")
@@ -61,13 +61,13 @@ def get_datos_usuario(user_name:str)->dict:
     c = correo.__getitem__(0)
     us = usuario.__getitem__(0)
     con = contraseña.__getitem__(0)
-    datosU[0][0] = pn.__getitem__(0)
-    datosU[0][1] = sn.__getitem__(0)
-    datosU[0][2] = ap.__getitem__(0)
-    datosU[0][3] = am.__getitem__(0)
-    datosU[0][4] = c.__getitem__(0)
-    datosU[0][5] = us.__getitem__(0)
-    datosU[0][6] = con.__getitem__(0)
+    datosU[0,0] = pn.__getitem__(0)
+    datosU[0,1] = sn.__getitem__(0)
+    datosU[0,2] = ap.__getitem__(0)
+    datosU[0,3] = am.__getitem__(0)
+    datosU[0,4] = c.__getitem__(0)
+    datosU[0,5] = us.__getitem__(0)
+    datosU[0,6] = con.__getitem__(0)
     return datosU
 
 def comprobar_usuario()->list:
@@ -92,7 +92,6 @@ def get_password(user_name:str)->str:
         pas = password.__getitem__(i)
     return pas 
 
-get_password("Prueba")
 def actualizar_password(user_name:str, password: str)->str:
     password_cryp = sha256_crypt.hash(password)
     conexion = conectarse()
@@ -110,7 +109,7 @@ def save_peliculas(nombre:str, clasificacion:str, duracion:float, imagen:str, si
     conexion.close()
 
 def get_pelicula(nPelicula:str)->list:
-    peliculas = [],[]
+    peliculas = [1,4]
     conexion = conectarse()
     with conexion.cursor() as cursor:
         nombre = cursor.execute("SELECT nombre FROM peliculas WHERE nombre = '" + nPelicula + "'")
@@ -127,14 +126,14 @@ def get_pelicula(nPelicula:str)->list:
         clas = clasificaion.__getitem__(i)
         dura = duracion.__getitem__(i)
         img = imagen.__getitem__(i)
-    peliculas[0][0] = nom.__getitem__(i)
-    peliculas[0][1] = clas.__getitem__(i)
-    peliculas[0][2] = dura.__getitem__(i)
-    peliculas[0][3] = img.__getitem__(i)
+    peliculas[0,0] = nom.__getitem__(i)
+    peliculas[0,1] = clas.__getitem__(i)
+    peliculas[0,2] = dura.__getitem__(i)
+    peliculas[0,3] = img.__getitem__(i)
     return peliculas 
 
 def get_peliculas()->list:
-    peliculas = [],[]
+    peliculas = [n,4]
     conexion = conectarse()
     with conexion.cursor() as cursor:
         nombre = cursor.execute("SELECT nombre FROM peliculas")
@@ -151,10 +150,10 @@ def get_peliculas()->list:
         clas = clasificaion.__getitem__(i)
         dura = duracion.__getitem__(i)
         img = imagen.__getitem__(i)
-        peliculas[i][0] = nom.__getitem__(i)
-        peliculas[i][1] = clas.__getitem__(i)
-        peliculas[i][2] = dura.__getitem__(i)
-        peliculas[i][3] = img.__getitem__(i)
+        peliculas[i,0] = nom.__getitem__(i)
+        peliculas[i,1] = clas.__getitem__(i)
+        peliculas[i,2] = dura.__getitem__(i)
+        peliculas[i,3] = img.__getitem__(i)
     return peliculas 
 
 def save_post(usuario:str, titulo:str, descripcion:float)->None:
@@ -166,7 +165,7 @@ def save_post(usuario:str, titulo:str, descripcion:float)->None:
     conexion.close()
 
 def get_post()->list:
-    comentarios = [],[]
+    comentarios = [n,3]
     conexion = conectarse()
     with conexion.cursor() as cursor:
         usuario = cursor.execute("SELECT usuario FROM comentarios " )
@@ -175,17 +174,15 @@ def get_post()->list:
         comentario = cursor.fetchall()
         post = cursor.execute("SELECT post FROM comentarios ")
         post = cursor.fetchall()
-        replica = cursor.execute("SELECT replica FROM comentarios ")
-        replica = cursor.fetchall()
     conexion.close() 
     for i in range(len(usuario)):
         us = usuario.__getitem__(i)
         com = comentario.__getitem__(i)
         pos = post.__getitem__(i)
         repl = replica.__getitem__(i)
-        comentarios[i][1] = com.__getitem__(i)
-        comentarios[i][2] = pos.__getitem__(i)
-        comentarios[i][3] = repl.__getitem__(i)
+        comentarios[i,1] = com.__getitem__(i)
+        comentarios[i,2] = pos.__getitem__(i)
+        comentarios[i,3] = repl.__getitem__(i)
     return comentarios 
 
 def save_quejas(usuario:str, queja:str)->None:
@@ -197,7 +194,7 @@ def save_quejas(usuario:str, queja:str)->None:
     conexion.close()
     
 def get_quejas()->list:
-    quejas = [],[]
+    quejas = [n,2]
     conexion = conectarse()
     with conexion.cursor() as cursor:
         usuario = cursor.execute("SELECT usuario FROM quejas" )
@@ -208,10 +205,10 @@ def get_quejas()->list:
     for i in range(len(usuario)):
         us = usuario.__getitem__(i)
         quej = queja.__getitem__(i)
-        quejas[i][0] = us.__getitem__(i)
-        quejas[i][1] = quej.__getitem__(i)
+        quejas[i,0] = us.__getitem__(i)
+        quejas[i,1] = quej.__getitem__(i)
         
     print(str(quejas))
     return quejas 
-get_quejas()
+#get_quejas()
 #Referencia de los get: https://parzibyte.me/blog/2021/03/29/flask-mysql-ejemplo-conexion-crud/

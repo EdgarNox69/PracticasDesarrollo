@@ -159,7 +159,7 @@ def get_peliculas()->list:
 def save_post(usuario:str, titulo:str, descripcion:float)->None:
     conexion = conectarse()
     with conexion.cursor() as cursor:
-        cursor.execute("INSERT INTO post(usuario, titulo, comentario,) VALUES (%s, %s, %s)",
+        cursor.execute("INSERT INTO post(usuario, titulo, comentario) VALUES (%s, %s, %s)",
                        (usuario, titulo, descripcion))
     conexion.commit()
     conexion.close()

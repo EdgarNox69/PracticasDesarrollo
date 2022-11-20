@@ -5,5 +5,24 @@
 {% endblock %}
 {% block body %}
     <div>
+        <form action="" method="POST" class="form-box animate__animated animate__fadeInUp" >
+            <input type="text" placeholder="Titulo" name="titulo">
+            <input type="password" placeholder="Comentario" name="comentario">
+            <button type="Publicar">
+                Publicar
+            </button>
+        </form>
     </div>
+    <div>{%for datos in datos%}
+        <div>
+            <h3>{{datos[0]}}</h3>
+        </div>
+        <div>
+            <h4>{{datos[1]}}</h4>
+        </div>
+        <div>
+            <h4>{{datos[2]}}</h4>
+        </div>
+    </div>{% endFor %}
+    
 {% endblock %}

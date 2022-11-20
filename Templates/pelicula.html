@@ -8,10 +8,17 @@
 {% block body %}
     <div>
         <div name = "imagen">
-            <img class="img-fluid" src="./static/imagenes/{{peliclas[3]}}" width="50%" height="50%" alt="{{peliclas[0]}}"/>
+            <img class="img-fluid" src="{{peliclas[3]}}" width="50%" height="50%" alt="{{peliclas[0]}}"/>
         </div>
         <div>
             <p>Duracion: {{peliclas[2]}} min</p>
+        </div>
+        <div>
+            <p>Clasificacion: {{peliclas[1]}}</p>
+        </div>
+        <div>
+            <p>Sinopsis:</p>
+            <p>{{pelicula[4]}}</p>
         </div>
     </div>
 {% endblock %}

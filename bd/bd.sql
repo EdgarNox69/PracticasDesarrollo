@@ -26,7 +26,7 @@ CREATE TABLE `peliculas` (
   `idpeliculas` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
   `clasificacion` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
-  `duracion` float DEFAULT NULL,
+  `duracion` varchar(10) COLLATE utf8mb3_bin DEFAULT NULL,
   `imagen` mediumtext COLLATE utf8mb3_bin,
   `sinopsis` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
   PRIMARY KEY (`idpeliculas`)
@@ -54,7 +54,6 @@ CREATE TABLE `post` (
   `usuario` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
   `titulo` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
   `comentario` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
-  `fecha` date DEFAULT NULL,
   PRIMARY KEY (`idpost`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -132,4 +131,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-19 15:27:21
+-- Dump completed on 2022-11-20 13:49:24

@@ -122,14 +122,8 @@ def save_pelicula():
 @app.route('/pelicula/<nombre>', methods=['GET','POST'])
 def pelicula():
     if request.method == 'GET':
-        msg = ''
-        return render_template('save_Peliculas.html',mensaje=msg)
-    if request.method == 'POST':
-        valor = request.form['enviar']
-        if valor == 'Enviar':
-            nombre = request.form['nombre']
-            peli = get_pelicula()
-            return render_template('/pelicula.html', pelicula = peli)
+        peli = get_pelicula()
+        return render_template('save_Peliculas.html', pelicula = peli)
 
 @app.route('/perfil', methods=['GET','POST'])
 @app.route('/perfil/<usuario>', methods=['GET','POST'])
@@ -161,6 +155,22 @@ def quejas():
             save_quejas(usuario, queja)
             quejaa = get_quejas()
             return render_template('quejas.html', quejas = quejaa)
+
+@app.route('/foro', methods=['GET','POST'])
+@app.route('/foro/', methods=['GET','POST'])
+def foro():
+    if request.method == 'GET':
+        pos = get_post()
+        return render_template('foro.html', posts = pos)
+    if request.method == 'POST':
+        valor = request.form['Publicar']
+        if valor == 'Publicar':
+            usuario = user_in_sesion
+            queja = request.form['titulo']
+            queja = request.form['comentario']
+            save_post(usuario, queja)
+            pos = get_post()
+            return render_template('foro.html', posts = pos)
 
 #Cerrar sesion
 @app.route('/logout', methods=['GET'])

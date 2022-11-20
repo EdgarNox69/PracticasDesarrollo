@@ -1,6 +1,6 @@
 from passlib.hash import sha256_crypt
 import pymysql
-from numpy import *
+#from numpy import *
 #'''
 class Usuarios():
     def __init__(self, pNombre, sNombre, pApellido, sApellido, correo, usuario, password):
@@ -213,5 +213,5 @@ def get_quejas()->list:
         
     print(str(quejas))
     return quejas 
-get_quejas()
+#get_quejas()
 #Referencia de los get: https://parzibyte.me/blog/2021/03/29/flask-mysql-ejemplo-conexion-crud/

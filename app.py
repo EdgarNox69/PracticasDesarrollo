@@ -2,7 +2,7 @@ from flask import *
 from funciones import *
 from login import *
 from passlib.hash import sha256_crypt
-from numpy import *
+#from numpy import *
 import os
 
 app = Flask(__name__)

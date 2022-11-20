@@ -167,21 +167,22 @@ def save_post(usuario:str, titulo:str, descripcion:float)->None:
 def get_post()->list:
     conexion = conectarse()
     with conexion.cursor() as cursor:
-        usuario = cursor.execute("SELECT usuario FROM comentarios " )
+        usuario = cursor.execute("SELECT usuario FROM post" )
         usuario = cursor.fetchall()
-        comentario = cursor.execute("SELECT comentario FROM comentarios ")
+        titulo = cursor.execute("SELECT titulo FROM post")
+        titulo = cursor.fetchall()
+        comentario = cursor.execute("SELECT comentario FROM post")
         comentario = cursor.fetchall()
-        post = cursor.execute("SELECT post FROM comentarios ")
-        post = cursor.fetchall()
     conexion.close() 
     n=len(usuario)
     comentarios = [n,3]
     for i in range(len(usuario)):
         us = usuario.__getitem__(i)
         com = comentario.__getitem__(i)
-        pos = post.__getitem__(i)
+        titulo = titulo.__getitem__(i)
+        comentarios[i,0] = us.__getitem__(i)
         comentarios[i,1] = com.__getitem__(i)
-        comentarios[i,2] = pos.__getitem__(i)
+        comentarios[i,2] = titulo.__getitem__(i)
     return comentarios 
 
 def save_quejas(usuario:str, queja:str)->None:

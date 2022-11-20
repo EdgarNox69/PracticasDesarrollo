@@ -180,10 +180,8 @@ def get_post()->list:
         us = usuario.__getitem__(i)
         com = comentario.__getitem__(i)
         pos = post.__getitem__(i)
-        repl = replica.__getitem__(i)
         comentarios[i,1] = com.__getitem__(i)
         comentarios[i,2] = pos.__getitem__(i)
-        comentarios[i,3] = repl.__getitem__(i)
     return comentarios 
 
 def save_quejas(usuario:str, queja:str)->None:
@@ -203,13 +201,12 @@ def get_quejas()->list:
         queja = cursor.fetchall()
     conexion.close() 
     n=len(usuario)
-    quejas = [n,2]
+    quejas = [n, 2]
     for i in range(len(usuario)):
         us = usuario.__getitem__(i)
         quej = queja.__getitem__(i)
-        quejas[i,0] = us.__getitem__(i)
-        quejas[i,1] = quej.__getitem__(i)
-        
+        quejas[i][0] = us.__getitem__(i)
+        quejas[i][1] = quej.__getitem__(i)
     print(str(quejas))
     return quejas 
 get_quejas()

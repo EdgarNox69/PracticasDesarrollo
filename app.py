@@ -133,14 +133,6 @@ def usuario():
         usuario = get_datos_usuario(user_in_sesion)
         return render_template('perfil.html', datos = usuario)
         
-@app.route('/foro', methods=['GET','POST'])
-@app.route('/foro/', methods=['GET','POST'])
-def foro():
-    if request.method == 'GET':
-        msg = ''
-        pos = get_post()
-        return render_template('foro.html', post = pos)
-        
 @app.route('/quejas', methods=['GET','POST'])
 @app.route('/quejas/', methods=['GET','POST'])
 def quejas():

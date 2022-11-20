@@ -2,7 +2,6 @@ from flask import *
 from funciones import get_peliculas, get_usuario, comprobar_usuario, get_password, save_user, actualizar_password, get_datos_usuario, get_pelicula, get_quejas, save_quejas, get_post, save_post
 from login import *
 from passlib.hash import sha256_crypt
-import os
 
 app = Flask(__name__)
 app.secret_key = "Moltr3s_3l_Gu4jolot3_M4cías"
@@ -113,7 +112,6 @@ def save_pelicula():
             clasificaion = request.form['clasificacion']
             duracion = request.form['duracion']
             img = request.form['imagen']
-            os.mkdir("./static/imagenes/"+img)
             sinopsis  = request.form['sinopsis']
             c_pelicula = get_peliculas()
             if nombre not in c_pelicula:

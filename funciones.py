@@ -108,7 +108,7 @@ def save_peliculas(nombre:str, clasificacion:str, duracion:float, imagen:str, si
     conexion.close()
 
 def get_pelicula(nPelicula:str)->list:
-    peliculas = [1,4]
+    peliculas = ([],[])
     conexion = conectarse()
     with conexion.cursor() as cursor:
         nombre = cursor.execute("SELECT nombre FROM peliculas WHERE nombre = '" + nPelicula + "'")
@@ -144,7 +144,7 @@ def get_peliculas()->list:
         imagen = cursor.fetchall()
     conexion.close() 
     n=len(nombre)
-    peliculas = [n,4]
+    peliculas = ([],[])
     for i in range(len(nombre)):
         nom = nombre.__getitem__(i)
         clas = clasificaion.__getitem__(i)
@@ -175,7 +175,7 @@ def get_post()->list:
         comentario = cursor.fetchall()
     conexion.close() 
     n=len(usuario)
-    comentarios = [n,3]
+    comentarios = ([],[])
     for i in range(len(usuario)):
         us = usuario.__getitem__(i)
         com = comentario.__getitem__(i)
@@ -202,7 +202,7 @@ def get_quejas()->list:
         queja = cursor.fetchall()
     conexion.close() 
     n=len(usuario)
-    quejas = ([n],[2])
+    quejas = ([],[])
     for i in range(len(usuario)):
         us = usuario.__getitem__(i)
         quej = queja.__getitem__(i)

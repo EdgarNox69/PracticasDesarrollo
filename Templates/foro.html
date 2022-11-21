@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 {% block title %}Foro{% endblock %}
 {% block head %}
+    <style>
+        div.Peli{
+            padding-left: 30%;
+        }
+    </style>
 {{super()}}
 {% endblock %}
 {% block body %}
-    <div>
+    <div class="Peli">
         <form action="" method="POST" class="form-box animate__animated animate__fadeInUp" >
             <input type="text" placeholder="Titulo" name="titulo">
             <input type="password" placeholder="Comentario" name="comentario">
@@ -13,7 +18,7 @@
             </button>
         </form>
     </div>
-    <div>{%for datos in datos%}
+    <div >{%for datos in datos%}
         <div>
             <h3>Usuario: {{datos[0]}}</h3>
         </div>

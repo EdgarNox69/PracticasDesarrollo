@@ -5,26 +5,33 @@
     <meta name = "viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv = "X-UA-Compatible" content="ie=edge">
     <title>LOGIN</title>
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link rel="stylesheet" href="./estilo.css">
+    <style>
+        div.log{
+            padding-top: 15%;
+            padding-left: 40%;
+            padding-bottom: 26%;
+        }
+    </style>
 </head>
 <body>
-    
-    <form method="POST" class="form-box animate__animated animate__fadeInUp">
-        <h1 class="form-title">Sing In</h1>
-
-        <input type="text" placeholder="Username" id="usuario" name="usuario">
-        <input type="password" placeholder="Password" name="password">
-        <button method="POST" id="enviar" name = "Enviar" value="Enviar" type="submit">
-            LOGIN
-        </button>
-
-        <a href="/new_user">No tienes usuario?</a>
-
-    </form>
-
-    
+    <div class="log">
+        <form method="POST" class="form-box animate__animated animate__fadeInUp">
+            <h1 class="form-title">Sing In</h1>
+            <div>
+                <input type="text" placeholder="Username" id="usuario" name="usuario">
+            </div>
+            <div>
+                <input type="password" placeholder="Password" name="password">
+            </div>
+            <div>
+                <button method="POST" id="enviar" name = "Enviar" value="Enviar" type="submit">
+                    LOGIN
+                </button>
+            </div>
+            <div>
+                <a href="/new_user">No tienes usuario?</a>
+            </div>
+        </form>
+    </div>    
 </body>
 </html>

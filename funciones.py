@@ -150,14 +150,16 @@ def get_peliculas()->list:
         dura = duracion.__getitem__(i)
         img = imagen.__getitem__(i)
         peliculas[i][0] = (nom.__getitem__(0))
-        print(nom.__getitem__(0))
+        
         peliculas[i][1] = (clas.__getitem__(0))
-        print(clas.__getitem__(0))
+        
         peliculas[i][2] = (dura.__getitem__(0))
-        print(dura.__getitem__(0))
+        ##print(dura.__getitem__(0))
         peliculas[i][3] = (img.__getitem__(0))
         
+    print(peliculas)
     return peliculas
+    
 get_peliculas()
 
 def save_post(usuario:str, titulo:str, descripcion:float)->None:

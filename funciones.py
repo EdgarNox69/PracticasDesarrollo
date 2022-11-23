@@ -1,6 +1,5 @@
 from passlib.hash import sha256_crypt
 import pymysql
-import numpy
 #'''
 class Usuarios():
     def __init__(self, pNombre, sNombre, pApellido, sApellido, correo, usuario, password):
@@ -123,10 +122,10 @@ def get_pelicula(nPelicula:str)->list:
         clas = clasificaion.__getitem__(i)
         dura = duracion.__getitem__(i)
         img = imagen.__getitem__(i)
-    peliculas[0,0] = nom
-    peliculas[0,1] = clas
-    peliculas[0,2] = dura
-    peliculas[0,3] = img
+    peliculas[0] = nom
+    peliculas[1] = clas
+    peliculas[2] = dura
+    peliculas[3] = img
     return peliculas 
 
 def get_peliculas()->list:

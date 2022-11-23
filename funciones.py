@@ -1,5 +1,6 @@
 from passlib.hash import sha256_crypt
 import pymysql
+import numpy
 #'''
 class Usuarios():
     def __init__(self, pNombre, sNombre, pApellido, sApellido, correo, usuario, password):
@@ -99,11 +100,11 @@ def actualizar_password(user_name:str, password: str)->str:
 def save_peliculas(nombre:str, clasificacion:str, duracion:float, imagen:str, sinopsis:str)->None:
     conexion = conectarse()
     with conexion.cursor() as cursor:
-        cursor.execute("INSERT INTO peliculas(nombre, clasificacion, duracion, imagen, sonopsis) VALUES (%s, %s, %s, %s, %s)",
+        cursor.execute("INSERT INTO peliculas(nombre, clasificacion, duracion, imagen, sinopsis) VALUES (%s, %s, %s, %s, %s)",
                        (nombre, clasificacion, duracion, imagen, sinopsis))
     conexion.commit()
     conexion.close()
-
+    
 def get_pelicula(nPelicula:str)->list:
     peliculas = []
     conexion = conectarse()
@@ -140,19 +141,19 @@ def get_peliculas()->list:
         imagen = cursor.execute("SELECT imagen FROM peliculas")
         imagen = cursor.fetchall()
     conexion.close() 
-    n=len(nombre)
-    peliculas = []
+    n = len(nombre)
+    peliculas = [n, 4]
     for i in range(len(nombre)):
         nom = nombre.__getitem__(i)
         clas = clasificaion.__getitem__(i)
         dura = duracion.__getitem__(i)
         img = imagen.__getitem__(i)
-        peliculas[i,0] = nom
-        peliculas[i,1] = clas
-        peliculas[i,2] = dura
-        peliculas[i,3] = img
+        peliculas[i][0] = str(nom.__getitem__(0))
+        peliculas[i][1] = str(clas.__getitem__(0))
+        peliculas[i][2] = str(dura.__getitem__(0))
+        peliculas[i][3] = str(img.__getitem__(0))
     return peliculas 
-
+get_peliculas()
 def save_post(usuario:str, titulo:str, descripcion:float)->None:
     conexion = conectarse()
     with conexion.cursor() as cursor:
@@ -199,7 +200,7 @@ def get_quejas()->list:
         queja = cursor.fetchall()
     conexion.close() 
     n=len(usuario)
-    quejas = []
+    quejas = [n][2]
     for i in range(len(usuario)):
         us = usuario.__getitem__(i)
         quej = queja.__getitem__(i)

@@ -113,10 +113,10 @@ def save_pelicula():
             duracion = request.form['duracion']
             img = request.form['imagen']
             sinopsis  = request.form['sinopsis']
-            c_pelicula = get_peliculas()
-            if nombre not in c_pelicula:
-                save_pelicula(nombre, clasificaion, duracion, img, sinopsis)
-                return redirect('/')
+            #c_pelicula = get_peliculas()
+            #if nombre not in c_pelicula:
+            save_pelicula(nombre, clasificaion, duracion, img, sinopsis)
+            return redirect('/')
             
 @app.route('/pelicula', methods=['GET','POST'])
 @app.route('/pelicula/<nombre>', methods=['GET','POST'])

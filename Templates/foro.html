@@ -12,21 +12,19 @@
     <div class="Peli">
         <form action="" method="POST" class="form-box animate__animated animate__fadeInUp" >
             <input type="text" placeholder="Titulo" name="titulo">
-            <input type="password" placeholder="Comentario" name="comentario">
-            <button type="Publicar">
-                Publicar
-            </button>
+            <input type="text" placeholder="Comentario" name="comentario">
+            <input type="submit" id="publicar" name="publicar" value="Publicar">
         </form>
     </div>
-    <div >{%for datos in datos%}
+    <div >{%for posts in posts%}
         <div>
-            <h3>Usuario: {{datos[0]}}</h3>
+            <h3>Usuario: {{posts[posts][0]}}</h3>
         </div>
         <div>
-            <h4>Titulo: {{datos[1]}}</h4>
+            <h4>Titulo: {{posts[posts][1]}}</h4>
         </div>
         <div>
-            <h4>Comentario: {{datos[2]}}</h4>
+            <h4>Comentario: {{posts[posts][2]}}</h4>
         </div>
     </div>{% endfor %}
     

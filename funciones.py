@@ -65,7 +65,7 @@ def get_datos_usuario(user_name:str)->list:
     datosU.append(c)
     datosU.append(us)
     return datosU
-get_datos_usuario("Prueba")
+
 def comprobar_usuario()->list:
     c_us = []
     conexion = conectarse()
@@ -145,22 +145,16 @@ def get_peliculas()->list:
     
     for i in range(len(nombre)):    
         nom = nombre.__getitem__(i)
-        
         clas = clasificaion.__getitem__(i)
         dura = duracion.__getitem__(i)
         img = imagen.__getitem__(i)
         peliculas[i][0] = (nom.__getitem__(0))
-        
         peliculas[i][1] = (clas.__getitem__(0))
-        
         peliculas[i][2] = (dura.__getitem__(0))
-        ##print(dura.__getitem__(0))
         peliculas[i][3] = (img.__getitem__(0))
         
-    print(peliculas)
     return peliculas
     
-get_peliculas()
 
 def save_post(usuario:str, titulo:str, descripcion:float)->None:
     conexion = conectarse()
@@ -181,14 +175,14 @@ def get_post()->list:
         comentario = cursor.fetchall()
     conexion.close() 
     n=len(usuario)
-    comentarios = []
+    comentarios = [[0 for x in range(3)] for j in range(n)]
     for i in range(len(usuario)):
         us = usuario.__getitem__(i)
         com = comentario.__getitem__(i)
         titulo = titulo.__getitem__(i)
-        comentarios[i,0] = us
-        comentarios[i,1] = com
-        comentarios[i,2] = titulo
+        comentarios[i][0] = us.__getitem__(0)
+        comentarios[i][1] = titulo.__getitem__(0)
+        comentarios[i][2] = com.__getitem__(0)
     return comentarios 
 
 def save_quejas(usuario:str, queja:str)->None:
@@ -208,12 +202,12 @@ def get_quejas()->list:
         queja = cursor.fetchall()
     conexion.close() 
     n=len(usuario)
-    quejas = [n][2]
+    quejas = [[0 for x in range(2)] for j in range(n)]
     for i in range(len(usuario)):
         us = usuario.__getitem__(i)
         quej = queja.__getitem__(i)
-        quejas[i][0] = us
-        quejas[i][1] = quej
+        quejas[i][0] = us.__getitem__(0)
+        quejas[i][1] = quej.__getitem__(0)
     return quejas
 
 #Referencia de los get: https://parzibyte.me/blog/2021/03/29/flask-mysql-ejemplo-conexion-crud/

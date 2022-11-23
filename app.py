@@ -155,12 +155,12 @@ def foro():
         pos = get_post()
         return render_template('foro.html', posts = pos)
     if request.method == 'POST':
-        valor = request.form['Publicar']
+        valor = request.form['publicar']
         if valor == 'Publicar':
             usuario = user_in_sesion
-            queja = request.form['titulo']
+            titulo = request.form['titulo']
             queja = request.form['comentario']
-            save_post(usuario, queja)
+            save_post(usuario, titulo, queja)
             pos = get_post()
             return render_template('foro.html', posts = pos)
 

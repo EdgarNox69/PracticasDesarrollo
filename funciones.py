@@ -35,7 +35,7 @@ def get_usuario(user_name:str)->str:
     return us
 
 def get_datos_usuario(user_name:str)->list:
-    datosU = [1,7]
+    datosU = []
     conexion = conectarse()
     with conexion.cursor() as cursor:
         primerNombre = cursor.execute("SELECT primerNombre FROM usuarios WHERE usuario = " + "'" + user_name + "'")
@@ -50,8 +50,6 @@ def get_datos_usuario(user_name:str)->list:
         correo = cursor.fetchone()
         usuario = cursor.execute("SELECT usuario FROM usuarios WHERE usuario = " + "'" + user_name + "'")
         usuario = cursor.fetchone()
-        contraseña = cursor.execute("SELECT contraseña FROM usuarios WHERE usuario = " + "'" + user_name + "'")
-        contraseña = cursor.fetchone()
     conexion.close()
     pn = primerNombre.__getitem__(0)
     sn = segundoNombre.__getitem__(0)
@@ -59,16 +57,15 @@ def get_datos_usuario(user_name:str)->list:
     am = apellidoMaterno.__getitem__(0)
     c = correo.__getitem__(0)
     us = usuario.__getitem__(0)
-    con = contraseña.__getitem__(0)
-    datosU[0,0] = pn.__getitem__(0)
-    datosU[0,1] = sn.__getitem__(0)
-    datosU[0,2] = ap.__getitem__(0)
-    datosU[0,3] = am.__getitem__(0)
-    datosU[0,4] = c.__getitem__(0)
-    datosU[0,5] = us.__getitem__(0)
-    datosU[0,6] = con.__getitem__(0)
+    print(us)
+    datosU.append(pn)
+    datosU.append(sn)
+    datosU.append(ap)
+    datosU.append(am)
+    datosU.append(c)
+    datosU.append(us)
     return datosU
-
+get_datos_usuario("Prueba")
 def comprobar_usuario()->list:
     c_us = []
     conexion = conectarse()
@@ -108,7 +105,7 @@ def save_peliculas(nombre:str, clasificacion:str, duracion:float, imagen:str, si
     conexion.close()
 
 def get_pelicula(nPelicula:str)->list:
-    peliculas = ([],[])
+    peliculas = []
     conexion = conectarse()
     with conexion.cursor() as cursor:
         nombre = cursor.execute("SELECT nombre FROM peliculas WHERE nombre = '" + nPelicula + "'")
@@ -125,10 +122,10 @@ def get_pelicula(nPelicula:str)->list:
         clas = clasificaion.__getitem__(i)
         dura = duracion.__getitem__(i)
         img = imagen.__getitem__(i)
-    peliculas[0,0] = nom.__getitem__(i)
-    peliculas[0,1] = clas.__getitem__(i)
-    peliculas[0,2] = dura.__getitem__(i)
-    peliculas[0,3] = img.__getitem__(i)
+    peliculas[0,0] = nom
+    peliculas[0,1] = clas
+    peliculas[0,2] = dura
+    peliculas[0,3] = img
     return peliculas 
 
 def get_peliculas()->list:
@@ -144,16 +141,16 @@ def get_peliculas()->list:
         imagen = cursor.fetchall()
     conexion.close() 
     n=len(nombre)
-    peliculas = ([],[])
+    peliculas = []
     for i in range(len(nombre)):
         nom = nombre.__getitem__(i)
         clas = clasificaion.__getitem__(i)
         dura = duracion.__getitem__(i)
         img = imagen.__getitem__(i)
-        peliculas[i,0] = nom.__getitem__(i)
-        peliculas[i,1] = clas.__getitem__(i)
-        peliculas[i,2] = dura.__getitem__(i)
-        peliculas[i,3] = img.__getitem__(i)
+        peliculas[i,0] = nom
+        peliculas[i,1] = clas
+        peliculas[i,2] = dura
+        peliculas[i,3] = img
     return peliculas 
 
 def save_post(usuario:str, titulo:str, descripcion:float)->None:
@@ -175,14 +172,14 @@ def get_post()->list:
         comentario = cursor.fetchall()
     conexion.close() 
     n=len(usuario)
-    comentarios = ([],[])
+    comentarios = []
     for i in range(len(usuario)):
         us = usuario.__getitem__(i)
         com = comentario.__getitem__(i)
         titulo = titulo.__getitem__(i)
-        comentarios[i,0] = us.__getitem__(i)
-        comentarios[i,1] = com.__getitem__(i)
-        comentarios[i,2] = titulo.__getitem__(i)
+        comentarios[i,0] = us
+        comentarios[i,1] = com
+        comentarios[i,2] = titulo
     return comentarios 
 
 def save_quejas(usuario:str, queja:str)->None:
@@ -202,12 +199,12 @@ def get_quejas()->list:
         queja = cursor.fetchall()
     conexion.close() 
     n=len(usuario)
-    quejas = ([],[])
+    quejas = []
     for i in range(len(usuario)):
         us = usuario.__getitem__(i)
         quej = queja.__getitem__(i)
-        quejas[i][0] = us.__getitem__(i)
-        quejas[i][1] = quej.__getitem__(i)
+        quejas[i][0] = us
+        quejas[i][1] = quej
     return quejas
 
 #Referencia de los get: https://parzibyte.me/blog/2021/03/29/flask-mysql-ejemplo-conexion-crud/

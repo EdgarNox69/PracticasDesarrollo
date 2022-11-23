@@ -1,5 +1,5 @@
 from flask import*
-from funciones import get_peliculas, get_usuario, comprobar_usuario, get_password, save_user, actualizar_password, get_datos_usuario, get_pelicula, get_quejas, save_quejas, get_post, save_post
+from funciones import save_peliculas, get_peliculas, get_usuario, comprobar_usuario, get_password, save_user, actualizar_password, get_datos_usuario, get_pelicula, get_quejas, save_quejas, get_post, save_post
 from login import *
 from passlib.hash import sha256_crypt
 
@@ -115,7 +115,7 @@ def save_pelicula():
             sinopsis  = request.form['sinopsis']
             #c_pelicula = get_peliculas()
             #if nombre not in c_pelicula:
-            save_pelicula(nombre, clasificaion, duracion, img, sinopsis)
+            save_peliculas(nombre, clasificaion, duracion, img, sinopsis)
             return redirect('/')
             
 @app.route('/pelicula', methods=['GET','POST'])

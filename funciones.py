@@ -57,7 +57,6 @@ def get_datos_usuario(user_name:str)->list:
     am = apellidoMaterno.__getitem__(0)
     c = correo.__getitem__(0)
     us = usuario.__getitem__(0)
-    print(us)
     datosU.append(pn)
     datosU.append(sn)
     datosU.append(ap)
@@ -122,10 +121,10 @@ def get_pelicula(nPelicula:str)->list:
         clas = clasificaion.__getitem__(i)
         dura = duracion.__getitem__(i)
         img = imagen.__getitem__(i)
-    peliculas[0] = nom
-    peliculas[1] = clas
-    peliculas[2] = dura
-    peliculas[3] = img
+    peliculas[0] = nom.__getitem__(0)
+    peliculas[1] = clas.__getitem__(0)
+    peliculas[2] = dura.__getitem__(0)
+    peliculas[3] = img.__getitem__(0)
     return peliculas 
 
 def get_peliculas()->list:
@@ -133,25 +132,17 @@ def get_peliculas()->list:
     with conexion.cursor() as cursor:
         nombre = cursor.execute("SELECT nombre FROM peliculas")
         nombre = cursor.fetchall()
-        clasificaion = cursor.execute("SELECT clasificacion FROM peliculas")
-        clasificaion = cursor.fetchall()
-        duracion = cursor.execute("SELECT duracion FROM peliculas")
-        duracion = cursor.fetchall()
         imagen = cursor.execute("SELECT imagen FROM peliculas")
         imagen = cursor.fetchall()
     conexion.close() 
     n = len(nombre)
-    peliculas = [[0 for x in range(4)] for j in range(n)]
+    peliculas = [[0 for x in range(2)] for j in range(n)]
     
     for i in range(len(nombre)):    
         nom = nombre.__getitem__(i)
-        clas = clasificaion.__getitem__(i)
-        dura = duracion.__getitem__(i)
         img = imagen.__getitem__(i)
         peliculas[i][0] = (nom.__getitem__(0))
-        peliculas[i][1] = (clas.__getitem__(0))
-        peliculas[i][2] = (dura.__getitem__(0))
-        peliculas[i][3] = (img.__getitem__(0))
+        peliculas[i][1] = (img.__getitem__(0))
         
     return peliculas
     

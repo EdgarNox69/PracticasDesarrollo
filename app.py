@@ -6,20 +6,22 @@ from passlib.hash import sha256_crypt
 app = Flask(__name__)
 app.secret_key = "Moltr3s_3l_Gu4jolot3_M4cías"
 user_in_sesion = "invitado"
+nombre = ""
 @app.context_processor
 def handle_context():
     return dict(os=os)
 
 @app.route("/")
+@app.route("/", methods=['GET','POST'])
 def index():
     pelis = get_peliculas()
-    print("\nLas mentadas peliculas: " + str(pelis) + "\n")
     if user_in_sesion != "invitado":
         return render_template("index.html", peliculas = pelis)
     if request.method == 'POST':
         valor = request.form['enviar']
         if valor == 'Enviar':
-            usuario = request.form['usuario']
+            nombre.this = request.form['text']
+            print("\nLa weada de nombre " + nombre + "\m")
     else:
         return render_template("index.html", peliculas = pelis)
     
@@ -123,14 +125,13 @@ def save_pelicula():
 @app.route('/pelicula/<nombre>', methods=['GET','POST'])
 def pelicula():
     if request.method == 'GET':
-        peli = get_pelicula()
-        return render_template('save_Peliculas.html', pelicula = peli)
+        peli = get_pelicula(nombre.this)
+        return render_template('pelicula.html', dpelicula = peli)
 
 @app.route('/perfil', methods=['GET','POST'])
 @app.route('/perfil/<usuario>', methods=['GET','POST'])
 def usuario():
     if request.method == 'GET':
-        msg = ''
         usuario = get_datos_usuario(user_in_sesion)
         return render_template('perfil.html', datos = usuario)
         

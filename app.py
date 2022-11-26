@@ -13,6 +13,7 @@ def handle_context():
 @app.route("/")
 def index():
     pelis = get_peliculas()
+    print("\nLas mentadas peliculas: " + str(pelis) + "\n")
     if user_in_sesion != "invitado":
         return render_template("index.html", peliculas = pelis)
     if request.method == 'POST':

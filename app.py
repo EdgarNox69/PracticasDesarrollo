@@ -102,13 +102,6 @@ def save_pelicula():
                 save_peliculas(nombre, clasificaion, duracion, img, sinopsis)
             return redirect('/')
             
-@app.route('/pelicula', methods=['GET','POST'])
-@app.route('/pelicula/<name>', methods=['GET','POST'])
-def pelicula(name=nombre):
-    if request.method == 'GET':
-        peli = get_pelicula("'" + nombre + "'")
-        return render_template('pelicula.html', dpelicula = peli)
-
 @app.route('/perfil', methods=['GET','POST'])
 @app.route('/perfil/<usuario>', methods=['GET','POST'])
 def usuario():

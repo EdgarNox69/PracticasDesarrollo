@@ -96,30 +96,6 @@ def save_peliculas(nombre:str, clasificacion:str, duracion:float, imagen:str, si
                        (nombre, clasificacion, duracion, imagen, sinopsis))
     conexion.commit()
     conexion.close()
-    
-def get_pelicula(nPelicula:str)->list:
-    peliculas = []
-    conexion = conectarse()
-    with conexion.cursor() as cursor:
-        nombre = cursor.execute("SELECT nombre FROM peliculas WHERE nombre = '" + nPelicula + "'")
-        nombre = cursor.fetchone()
-        clasificaion = cursor.execute("SELECT clasificacion FROM peliculas WHERE nombre = '" + nPelicula + "'")
-        clasificaion = cursor.fetchone()
-        duracion = cursor.execute("SELECT duracion FROM peliculas WHERE nombre = '" + nPelicula + "'")
-        duracion = cursor.fetchone()
-        imagen = cursor.execute("SELECT imagen FROM peliculas WHERE nombre = '" + nPelicula + "'")
-        imagen = cursor.fetchone()
-        sinopsis = cursor.execute("SELECT sinopsis FROM peliculas WHERE nombre = '" + nPelicula + "'")
-        sinopsis = cursor.fetchone()
-    conexion.close() 
-    for i in range(len(nombre)):
-        peliculas.append(nombre.__getitem__(i))
-        peliculas.append(clasificaion.__getitem__(i))
-        peliculas.append(duracion.__getitem__(i))
-        peliculas.append(imagen.__getitem__(i)) 
-        peliculas.append(sinopsis.__getitem__(i))
-    print(peliculas)
-    return peliculas 
 
 def get_peliculas()->list:
     conexion = conectarse()

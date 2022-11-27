@@ -37,15 +37,16 @@ def login():
             usuario = request.form['usuario']
             user = get_usuario(usuario)
             c_usuario = comprobar_usuario()
-            
+            user_in_sesion = str(usuario)
             if usuario not in c_usuario:
                 return redirect('/new_user')
+                user_in_sesion = ""
             else:
                 if usuario == user:
                     password_db = get_password(usuario) # password guardado
                     password_forma = request.form['password'] #password presentado
                     verificado = sha256_crypt.verify(password_forma,password_db)
-                    user_in_sesion = usuario
+                    print("\n\n\n\nMentado usuario: " + str(user_in_sesion) + "\n\n\n\n\n")
                     if (verificado == True):
                         session['usuario'] = usuario
                         session['logged_in'] = True

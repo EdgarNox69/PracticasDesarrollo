@@ -1,24 +1,36 @@
 {% extends "base.html" %}
-{% block title %}{{pelicula[0]}}{% endblock %}
+{% block title %}Pelicula{% endblock %}
 {% block head %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        div.Pelic{
+            padding-top: 2%;
+            padding-left: 5%;
+        }
+        div.imagen{
+            height: 50%;
+            width: 50%;
+        }
+    </style>
 {{super()}}
 {% endblock %}
 {% block body %}
-    <div>
-        <div name = "imagen">
-            <img class="img-fluid" src="{{peliclas[3]}}" width="50%" height="50%" alt="{{peliclas[0]}}"/>
+    <div class="Pelic">
+        <div class = "imagen">
+            <img class="img-fluid" src="{{dpelicula[3]}}" width="50%" height="50%" alt="{{dpelicula[0]}}"/>
         </div>
-        <div>
-            <p>Duracion: {{peliclas[2]}} min</p>
-        </div>
-        <div>
-            <p>Clasificacion: {{peliclas[1]}}</p>
-        </div>
-        <div>
-            <p>Sinopsis:</p>
-            <p>{{pelicula[4]}}</p>
+        <div class="datos">
+            <div>
+                <p>Duracion: {{dpelicula[2]}} min</p>
+            </div>
+            <div>
+                <p>Clasificacion: {{dpelicula[1]}}</p>
+            </div>
+            <div>
+                <p>Sinopsis:</p>
+                <p>{{dpelicula[4]}}</p>
+            </div>
         </div>
     </div>
 {% endblock %}

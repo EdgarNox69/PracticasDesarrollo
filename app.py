@@ -1,29 +1,28 @@
 from flask import*
-from funciones import save_peliculas, get_peliculas, get_usuario, comprobar_usuario, get_password, save_user, actualizar_password, get_datos_usuario, get_pelicula, get_quejas, save_quejas, get_post, save_post
+from funciones import *
 from login import *
 from passlib.hash import sha256_crypt
 
 app = Flask(__name__)
 app.secret_key = "Moltr3s_3l_Gu4jolot3_M4cías"
-user_in_sesion = "invitado"
+user_in_sesion = ""
 nombre = ""
 @app.context_processor
 def handle_context():
     return dict(os=os)
 
-@app.route("/")
+@app.route("/", methods=['GET','POST'])
 @app.route("/", methods=['GET','POST'])
 def index():
     pelis = get_peliculas()
-    if user_in_sesion != "invitado":
+    
+    if request.method == 'GET':
         return render_template("index.html", peliculas = pelis)
     if request.method == 'POST':
-        valor = request.form['enviar']
-        if valor == 'Enviar':
-            nombre.this = request.form['text']
+        valor = request.form['pelicula']
+        if valor == 'Pelicula':
+            nombre.this = request.form['nombre']
             print("\nLa weada de nombre " + nombre + "\m")
-    else:
-        return render_template("index.html", peliculas = pelis)
     
 
 @app.route('/login', methods=['GET','POST'])
@@ -46,7 +45,7 @@ def login():
                     password_db = get_password(usuario) # password guardado
                     password_forma = request.form['password'] #password presentado
                     verificado = sha256_crypt.verify(password_forma,password_db)
-                    user_in_sesion = user
+                    user_in_sesion = usuario
                     if (verificado == True):
                         session['usuario'] = usuario
                         session['logged_in'] = True
@@ -83,25 +82,7 @@ def new_user():
             if usuario not in c_usuario:
                 save_user(p_Nombre, s_nombre, p_Apellido, s_Apellido, correo, usuario, password_cryp)
             return redirect('/login')
-
-@app.route('/restart_password', methods=['GET','POST'])
-@app.route('/restart_password/', methods=['GET','POST'])
-def restart_password():
-    if request.method == 'GET':
-        msg = ''
-        return render_template('restart_password.html',mensaje=msg)
-    if request.method == 'POST':
-        valor = request.form['enviar']
-        if valor == 'Enviar':
-            usuario = request.form['usuario']
-            password = request.form['password']
-            c_us = comprobar_usuario()
-            if usuario not in c_us:
-                return redirect("/new_user")
-            else:
-                actualizar_password(usuario, password)
-                return redirect("/")
-            
+         
 @app.route('/save_pelicula', methods=['GET','POST'])
 @app.route('/save_pelicula/', methods=['GET','POST'])
 def save_pelicula():
@@ -116,24 +97,24 @@ def save_pelicula():
             duracion = request.form['duracion']
             img = request.form['imagen']
             sinopsis  = request.form['sinopsis']
-            #c_pelicula = get_peliculas()
-            #if nombre not in c_pelicula:
-            save_peliculas(nombre, clasificaion, duracion, img, sinopsis)
+            c_pelicula = get_peliculas()
+            if nombre not in c_pelicula:
+                save_peliculas(nombre, clasificaion, duracion, img, sinopsis)
             return redirect('/')
             
 @app.route('/pelicula', methods=['GET','POST'])
-@app.route('/pelicula/<nombre>', methods=['GET','POST'])
-def pelicula():
+@app.route('/pelicula/<name>', methods=['GET','POST'])
+def pelicula(name=nombre):
     if request.method == 'GET':
-        peli = get_pelicula(nombre.this)
+        peli = get_pelicula("'" + nombre + "'")
         return render_template('pelicula.html', dpelicula = peli)
 
 @app.route('/perfil', methods=['GET','POST'])
 @app.route('/perfil/<usuario>', methods=['GET','POST'])
 def usuario():
     if request.method == 'GET':
-        usuario = get_datos_usuario(user_in_sesion)
-        return render_template('perfil.html', datos = usuario)
+        us = get_datos_usuario("'" + user_in_sesion + "'")
+        return render_template('perfil.html', datos = us)
         
 @app.route('/quejas', methods=['GET','POST'])
 @app.route('/quejas/', methods=['GET','POST'])
@@ -153,8 +134,8 @@ def quejas():
 @app.route('/foro', methods=['GET','POST'])
 @app.route('/foro/', methods=['GET','POST'])
 def foro():
+    pos = get_post()
     if request.method == 'GET':
-        pos = get_post()
         return render_template('foro.html', posts = pos)
     if request.method == 'POST':
         valor = request.form['publicar']
@@ -163,7 +144,6 @@ def foro():
             titulo = request.form['titulo']
             queja = request.form['comentario']
             save_post(usuario, titulo, queja)
-            pos = get_post()
             return render_template('foro.html', posts = pos)
 
 #Cerrar sesion

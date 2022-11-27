@@ -4,6 +4,17 @@
     <style>
         div.Peli{
             padding-left: 30%;
+            padding-top: 5%;
+        }
+        div.post{
+            padding-left: 35%;
+            padding-top: 1%;
+            border: 5%;
+            width: max-content;
+        }
+        div.estilop{
+            margin-block: 2%;
+            outline: auto;
         }
     </style>
 {{super()}}
@@ -16,15 +27,18 @@
             <input type="submit" id="publicar" name="publicar" value="Publicar">
         </form>
     </div>
-    <div >{%for posts in posts%}
-        <div>
-            <h3>Usuario: {{posts[posts][0]}}</h3>
-        </div>
-        <div>
-            <h4>Titulo: {{posts[posts][1]}}</h4>
-        </div>
-        <div>
-            <h4>Comentario: {{posts[posts][2]}}</h4>
+    {%for posts in posts%}
+    <div class="post" >
+        <div class="estilop">
+            <div>
+                <p>Usuario: {{posts[0]}}</p>
+            </div>
+            <div class="titulo">
+                <p>Titulo: {{posts[1]}}</p>
+            </div>
+            <div>
+                <p>Comentario: {{posts[2]}}</p>
+            </div>
         </div>
     </div>{% endfor %}
     

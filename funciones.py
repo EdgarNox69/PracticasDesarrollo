@@ -51,18 +51,12 @@ def get_datos_usuario(user_name:str)->list:
         usuario = cursor.execute("SELECT usuario FROM usuarios WHERE usuario = " + "'" + user_name + "'")
         usuario = cursor.fetchone()
     conexion.close()
-    pn = primerNombre.__getitem__(0)
-    sn = segundoNombre.__getitem__(0)
-    ap = apellidoPaterno.__getitem__(0)
-    am = apellidoMaterno.__getitem__(0)
-    c = correo.__getitem__(0)
-    us = usuario.__getitem__(0)
-    datosU.append(pn)
-    datosU.append(sn)
-    datosU.append(ap)
-    datosU.append(am)
-    datosU.append(c)
-    datosU.append(us)
+    datosU.append(primerNombre.__getitem__(0))
+    datosU.append(segundoNombre.__getitem__(0))
+    datosU.append(apellidoPaterno.__getitem__(0))
+    datosU.append(apellidoMaterno.__getitem__(0))
+    datosU.append(correo.__getitem__(0))
+    datosU.append(usuario.__getitem__(0))
     return datosU
 
 def comprobar_usuario()->list:
@@ -115,16 +109,16 @@ def get_pelicula(nPelicula:str)->list:
         duracion = cursor.fetchone()
         imagen = cursor.execute("SELECT imagen FROM peliculas WHERE nombre = '" + nPelicula + "'")
         imagen = cursor.fetchone()
+        sinopsis = cursor.execute("SELECT sinopsis FROM peliculas WHERE nombre = '" + nPelicula + "'")
+        sinopsis = cursor.fetchone()
     conexion.close() 
     for i in range(len(nombre)):
-        nom = nombre.__getitem__(i)
-        clas = clasificaion.__getitem__(i)
-        dura = duracion.__getitem__(i)
-        img = imagen.__getitem__(i)
-    peliculas[0] = nom.__getitem__(0)
-    peliculas[1] = clas.__getitem__(0)
-    peliculas[2] = dura.__getitem__(0)
-    peliculas[3] = img.__getitem__(0)
+        peliculas.append(nombre.__getitem__(i))
+        peliculas.append(clasificaion.__getitem__(i))
+        peliculas.append(duracion.__getitem__(i))
+        peliculas.append(imagen.__getitem__(i)) 
+        peliculas.append(sinopsis.__getitem__(i))
+    print(peliculas)
     return peliculas 
 
 def get_peliculas()->list:
@@ -146,7 +140,6 @@ def get_peliculas()->list:
         
     return peliculas
     
-
 def save_post(usuario:str, titulo:str, descripcion:float)->None:
     conexion = conectarse()
     with conexion.cursor() as cursor:
@@ -170,9 +163,9 @@ def get_post()->list:
     for i in range(len(usuario)):
         us = usuario.__getitem__(i)
         com = comentario.__getitem__(i)
-        titulo = titulo.__getitem__(i)
+        tit = titulo.__getitem__(i)
         comentarios[i][0] = us.__getitem__(0)
-        comentarios[i][1] = titulo.__getitem__(0)
+        comentarios[i][1] = tit.__getitem__(0)
         comentarios[i][2] = com.__getitem__(0)
     return comentarios 
 

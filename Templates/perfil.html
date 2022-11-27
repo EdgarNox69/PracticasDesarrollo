@@ -1,21 +1,27 @@
 {% extends "base.html" %}
 {% block title %}{{datos[5]}}{% endblock %}
 {% block head %}
+    <style>
+        div.Pefil{
+            padding-top: 5%;
+            padding-left: 25%;
+        }
+    </style>
 {{super()}}
 {% endblock %}
 {% block body %}
-    <div>
+    <div class="Perfil">
         <div>
-            <h3>{{datos[0]}}</h3>
-            <h3>{{datos[1]}}</h3>
-            <h3>{{datos[2]}}</h3>
-            <h3>{{datos[3]}}</h3>
+            <p>{{datos[0]}}</p>
+            <p>{{datos[1]}}</p>
+            <p>{{datos[2]}}</p>
+            <p>{{datos[3]}}</p>
         </div>
         <div>
-            <h3>{{datos[5]}}</h3>
+            <p>{{datos[5]}}</p>
         </div>
         <div>
-            <h3>{{datos[4]}}</h3>
+            <p>{{datos[4]}}</p>
         </div>
     </div>
 {% endblock %}

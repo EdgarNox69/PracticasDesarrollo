@@ -6,23 +6,17 @@ from passlib.hash import sha256_crypt
 app = Flask(__name__)
 app.secret_key = "Moltr3s_3l_Gu4jolot3_M4cías"
 user_in_sesion = 'Prueba'
-nombre = ""
 @app.context_processor
 def handle_context():
     return dict(os=os)
 
-@app.route("/", methods=['GET','POST'])
-@app.route("/", methods=['GET','POST'])
+@app.route("/")
+@app.route("/")
 def index():
     pelis = get_peliculas()
     
     if request.method == 'GET':
         return render_template("index.html", peliculas = pelis)
-    if request.method == 'POST':
-        valor = request.form['pelicula']
-        if valor == 'Pelicula':
-            nombre.this = request.form['nombre']
-            print("\nLa weada de nombre " + nombre + "\m")
     
 
 @app.route('/login', methods=['GET','POST'])
@@ -118,9 +112,8 @@ def quejas():
     if request.method == 'POST':
         valor = request.form['enviar']
         if valor == 'Enviar':
-            usuario = request.form['usuario']
             queja = request.form['queja']
-            save_quejas(usuario, queja)
+            save_quejas(user_in_sesion, queja)
             quejaa = get_quejas()
             return render_template('quejas.html', quejas = quejaa)
 
@@ -133,10 +126,9 @@ def foro():
     if request.method == 'POST':
         valor = request.form['publicar']
         if valor == 'Publicar':
-            usuario = user_in_sesion
             titulo = request.form['titulo']
             queja = request.form['comentario']
-            save_post(usuario, titulo, queja)
+            save_post(user_in_sesion, titulo, queja)
             return render_template('foro.html', posts = pos)
 
 #Cerrar sesion

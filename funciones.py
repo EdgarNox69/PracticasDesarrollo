@@ -35,7 +35,7 @@ def get_usuario(user_name:str)->str:
     return us
 
 def get_datos_usuario(user_name:str)->list:
-    datosU = []
+    datosU = ['','','','','','']
     conexion = conectarse()
     with conexion.cursor() as cursor:
         primerNombre = cursor.execute("SELECT primerNombre FROM usuarios WHERE usuario = " + "'" + user_name + "'")
@@ -51,12 +51,22 @@ def get_datos_usuario(user_name:str)->list:
         usuario = cursor.execute("SELECT usuario FROM usuarios WHERE usuario = " + "'" + user_name + "'")
         usuario = cursor.fetchone()
     conexion.close()
+
+    datosU[0] = primerNombre.__getitem__(0)
+    datosU[1] = segundoNombre.__getitem__(0)
+    datosU[2] = apellidoPaterno.__getitem__(0)
+    datosU[3] = apellidoMaterno.__getitem__(0)
+    datosU[4] = correo.__getitem__(0)
+    datosU[5] = usuario.__getitem__(0)
+    
+    """"
     datosU.append(primerNombre.__getitem__(0))
     datosU.append(segundoNombre.__getitem__(0))
     datosU.append(apellidoPaterno.__getitem__(0))
     datosU.append(apellidoMaterno.__getitem__(0))
     datosU.append(correo.__getitem__(0))
-    datosU.append(usuario.__getitem__(0))
+    datosU.append(usuario.__getitem__(0))"""
+    
     return datosU
 
 def comprobar_usuario()->list:

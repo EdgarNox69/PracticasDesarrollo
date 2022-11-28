@@ -5,7 +5,7 @@ from passlib.hash import sha256_crypt
 
 app = Flask(__name__)
 app.secret_key = "Moltr3s_3l_Gu4jolot3_M4cías"
-user_in_sesion = ""
+user_in_sesion = 'Prueba'
 nombre = ""
 @app.context_processor
 def handle_context():
@@ -103,10 +103,10 @@ def save_pelicula():
             return redirect('/')
             
 @app.route('/perfil', methods=['GET','POST'])
-@app.route('/perfil/<usuario>', methods=['GET','POST'])
+@app.route('/perfil/', methods=['GET','POST'])
 def usuario():
     if request.method == 'GET':
-        us = get_datos_usuario("'" + user_in_sesion + "'")
+        us = get_datos_usuario(user_in_sesion)
         return render_template('perfil.html', datos = us)
         
 @app.route('/quejas', methods=['GET','POST'])

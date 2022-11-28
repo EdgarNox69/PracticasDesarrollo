@@ -5,7 +5,7 @@ from passlib.hash import sha256_crypt
 
 app = Flask(__name__)
 app.secret_key = "Moltr3s_3l_Gu4jolot3_M4cías"
-user_in_sesion = 'Prueba'
+user_in_sesion = 'Urielk12'
 @app.context_processor
 def handle_context():
     return dict(os=os)

@@ -30,7 +30,7 @@ CREATE TABLE `peliculas` (
   `imagen` mediumtext COLLATE utf8mb3_bin,
   `sinopsis` longtext COLLATE utf8mb3_bin,
   PRIMARY KEY (`idpeliculas`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -39,7 +39,7 @@ CREATE TABLE `peliculas` (
 
 LOCK TABLES `peliculas` WRITE;
 /*!40000 ALTER TABLE `peliculas` DISABLE KEYS */;
-INSERT INTO `peliculas` VALUES (1,'Pantera Negra: Wakanda Por Siempre','B','161','https://static.cinepolis.com/img/peliculas/40552/1/1/40552.jpg','En PANTERA NEGRA: WAKANDA POR SIEMPRE de Marvel Studios, la reina Ramonda (Angela Bassett), Shuri (Letitia Wright), M\'Baku (Winston Duke), Okoye (Danai Gurira) y las Dora Milaje (incluida Florence Kasumba) luchan por proteger a su nación de las potencias mundiales que intervienen tras la muerte del Rey T\'Challa. Mientras los habitantes de Wakanda se esfuerzan embarcarse en un nuevo capítulo, los héroes deben unirse con la ayuda de War Dog Nakia (Lupita Nyong\'o) y Everett Ross (Martin Freeman) y forjar un nuevo camino para el reino de Wakanda. El film que cuenta con Tenoch Huerta como Namor, rey de una nación submarina oculta, también está protagonizada por Dominique Thorne, Michaela Coel, Mabel Cadena y Alex Livanalli.'),(2,'Fuerza Bruta','S/C','106','https://static.cinepolis.com/img/peliculas/40293/1/1/40293.jpg','Ma Seok-do (Don Lee de Eternals) se dirige a un país extranjero para extraditar a un sospechoso. Sin embargo, en su viaje descubre casos de asesinato adicionales y sospecha de un asesino que ha cometido crímenes contra turistas desde hace años.');
+INSERT INTO `peliculas` VALUES (1,'Pantera Negra: Wakanda Por Siempre','B','161','https://static.cinepolis.com/img/peliculas/40552/1/1/40552.jpg','En PANTERA NEGRA: WAKANDA POR SIEMPRE de Marvel Studios, la reina Ramonda (Angela Bassett), Shuri (Letitia Wright), M\'Baku (Winston Duke), Okoye (Danai Gurira) y las Dora Milaje (incluida Florence Kasumba) luchan por proteger a su nación de las potencias mundiales que intervienen tras la muerte del Rey T\'Challa. Mientras los habitantes de Wakanda se esfuerzan embarcarse en un nuevo capítulo, los héroes deben unirse con la ayuda de War Dog Nakia (Lupita Nyong\'o) y Everett Ross (Martin Freeman) y forjar un nuevo camino para el reino de Wakanda. El film que cuenta con Tenoch Huerta como Namor, rey de una nación submarina oculta, también está protagonizada por Dominique Thorne, Michaela Coel, Mabel Cadena y Alex Livanalli.'),(2,'Fuerza Bruta','S/C','106','https://static.cinepolis.com/img/peliculas/40293/1/1/40293.jpg','Ma Seok-do (Don Lee de Eternals) se dirige a un país extranjero para extraditar a un sospechoso. Sin embargo, en su viaje descubre casos de asesinato adicionales y sospecha de un asesino que ha cometido crímenes contra turistas desde hace años.'),(3,'Black Adam','B','126','https://static.cinepolis.com/img/peliculas/39642/1/1/39642.jpg','Casi 5,000 años después de obtener los poderes supremos de los antiguos dioses –y de ser encarcelado igual de rápido–, Black Adam (Dwayne Johnson) se libera de su tumba terrenal, listo para desatar su peculiar forma de justicia en el mundo moderno.'),(4,'El Poderoso Victoria','B','119','https://static.cinepolis.com/img/peliculas/40765/1/1/40765.jpg','En 1936 cuando se cierra la mina local y el futuro del pueblo se ve amenazado, Durán, un joven maquinista, deberá elegir entre renunciar a sus sueños y al amor de su vida o emprender la aventura de construir un tren de vapor con la ayuda de un inusual grupo de pobladores. Para ellos nada es imposible con un poco de ingenio mexicano.');
 /*!40000 ALTER TABLE `peliculas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -56,7 +56,7 @@ CREATE TABLE `post` (
   `titulo` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
   `comentario` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_bin DEFAULT NULL,
   PRIMARY KEY (`idpost`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -65,6 +65,7 @@ CREATE TABLE `post` (
 
 LOCK TABLES `post` WRITE;
 /*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` VALUES (1,'invitado','Prueba','Comentario de prueba'),(2,'invitado','Prueba','Comentario de prueba'),(3,'invitado','Prueba','Comentario de prueba'),(4,'invitado','Prueba','Comentario de prueba'),(5,'Urielk12','El jajas','Prueba jajas');
 /*!40000 ALTER TABLE `post` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,7 +81,7 @@ CREATE TABLE `quejas` (
   `usuario` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
   `queja` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
   PRIMARY KEY (`idquejas`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +90,7 @@ CREATE TABLE `quejas` (
 
 LOCK TABLES `quejas` WRITE;
 /*!40000 ALTER TABLE `quejas` DISABLE KEYS */;
-INSERT INTO `quejas` VALUES (1,'Prueba','Esto es una queja de prueba');
+INSERT INTO `quejas` VALUES (1,'Prueba','Esto es una queja de prueba'),(2,'Urielk12','Prueba 3');
 /*!40000 ALTER TABLE `quejas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +111,7 @@ CREATE TABLE `usuarios` (
   `usuario` varchar(45) COLLATE utf8mb3_bin DEFAULT NULL,
   `contraseña` longtext COLLATE utf8mb3_bin,
   PRIMARY KEY (`idusuarios`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +120,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Preuaba','PPrueba','pPrueba','ppPrueba','prueba@hotmail.com','Prueba','$5$rounds=535000$FrSILsega3it76mr$akPvDT9u1t.mD.AkToYgXZa1.Pyg13HLEIUyQVXOcr7');
+INSERT INTO `usuarios` VALUES (1,'Preuaba','PPrueba','pPrueba','ppPrueba','prueba@hotmail.com','Prueba','$5$rounds=535000$FrSILsega3it76mr$akPvDT9u1t.mD.AkToYgXZa1.Pyg13HLEIUyQVXOcr7'),(2,'URIEL','ABRAHAM','LOPEZ ','FLEISCHER','correo@hotmail.com','Urielk12','$5$rounds=535000$NOZKL8Asn98Z9Hzp$TP1tEFvzi3R8LC6U.GwqRJxODoG5aMejh1ayU6dpln6');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -132,4 +133,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-23 13:42:31
+-- Dump completed on 2022-11-28 11:41:14
